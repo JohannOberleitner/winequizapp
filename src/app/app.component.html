@@ -1,0 +1,3 @@
+<app-multiple-choice [quiz]="quiz" [appMode]="appMode" (doneEvent)="answersCompletedClicked()"></app-multiple-choice>
+<app-result-page [quiz]="quiz" [appMode]="appMode" (pageLeftEvent)="resultsPageLeft($event)"></app-result-page>
+<router-outlet />

@@ -1,0 +1,9 @@
+@if (appMode.showResults) {
+Question: {{ quiz.numberOfQuestions }}
+Correct Questions: {{ quiz.numberOfCompletelyCorrectQuestions }}
+Total sub questions: {{ quiz.numberOfSubQuestions }}
+Correct sub questions: {{ quiz.numberOfCorrectSubQuestions }}
+
+<div (click)="detailedResults_clicked()"><span>Detailed Results</span></div>
+<div (click)="newQuiz_clicked()"><span>Neues Quiz</span></div>
+}

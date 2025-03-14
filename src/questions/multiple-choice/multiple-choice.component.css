@@ -1,0 +1,66 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+
+  background-color: black;
+}
+
+.question-text {
+  color: white;
+  text-align: center;
+}
+
+.answers-finished {
+  margin-top: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+div.answers-finished span {
+  width: 30px;
+  background-color: lightgreen;
+  padding: 5px 30px 5px 30px;
+
+  color: black;
+}
+
+.answer-container {
+  justify-content: center;
+  align-items: center;
+}
+
+
+.answer {
+  margin: 8px auto;
+  background-color: dodgerblue;
+  color: black;
+  text-align: center;
+
+  max-width: 80%;
+  min-height: 40px;
+  height: 40px;
+}
+
+div.answer span {
+  display: inline-block;
+  /* background-color: green; */
+  /* margin: 6px auto auto auto; */
+  padding: 6px;
+}
+
+.answerselected {
+  background-color: lightgreen;
+}
+
+.selectedCorrect {
+  border-width: 10px;
+  border-style: solid;
+  border-color: green;
+}
+.selectedIncorrect {
+  border-width: 10px;
+  border-style: solid;
+  border-color: red;
+}

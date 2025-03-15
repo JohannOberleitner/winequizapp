@@ -1,9 +1,17 @@
 @if (appMode.showResults) {
-Question: {{ quiz.numberOfQuestions }}
-Correct Questions: {{ quiz.numberOfCompletelyCorrectQuestions }}
-Total sub questions: {{ quiz.numberOfSubQuestions }}
-Correct sub questions: {{ quiz.numberOfCorrectSubQuestions }}
+  <div class="container">
+    
+  <table id="results">
+    <tr>
+      <th></th><th>Correct / Total</th>
+    </tr>
+    <tr><td>Questions</td><td>{{ quiz.numberOfCompletelyCorrectQuestions }} / {{ quiz.numberOfQuestions }}</td></tr>
+    <tr><td>Subquetions</td><td>{{ quiz.numberOfCorrectSubQuestions }} / {{ quiz.numberOfSubQuestions }}</td></tr>
+  </table>
 
-<div (click)="detailedResults_clicked()"><span>Detailed Results</span></div>
-<div (click)="newQuiz_clicked()"><span>Neues Quiz</span></div>
+  <div id="button-panel">
+    <div (click)="detailedResults_clicked()" class="clickable-panel button-left">Detailed Results</div>
+    <div (click)="newQuiz_clicked()" class="clickable-panel button-right">Neues Quiz</div>
+  </div>
+</div>
 }

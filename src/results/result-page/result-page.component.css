@@ -1,20 +1,30 @@
 .container {
-  
+  display: flex;
+  flex-direction: column;
   max-width: 400px;
-  padding-bottom: 10px;
+  width: 400px;
+  min-width: 400px;
+  height: 90vh;
+  margin: auto;
 
   color: white;
   background-color: black;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  align-items: center;
+}
+
+div.results-panel {
+  margin: 20px 20px 20px 20px; 
+    /*padding: 20px 0px 0px 0px;*/
+  padding: 0px;
+  align-items: stretch;
+}
+
+div.results-panel p {
+  font-size: large;
+  text-align:center;
 }
 
 #results {
-  max-height: 100%;
-  align-items: center;
-  width: 100%;
+  width:100%;
 }
 
 #results, #results tr, #results td {
@@ -25,8 +35,14 @@
 äresults th, #results td {
   text-align: center;
 }
+#results tr > th {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 #results tr > td {
   padding-left: 10px;
+  padding-right: 10px;
   text-align: left;
 }
 
@@ -35,26 +51,24 @@ table#results {
 }
 
 #button-panel {
-  width: 100;
   min-height: 40px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-top: 100px;
+  width: 100%;
+  padding: 0 0px 0 0px;
+  margin-top: auto;
   margin-bottom: 30px;
   display: grid;
   grid-template-columns: repeat(2, 40%);
-  column-gap: 40px;
-  /* background-color: red; */
+  column-gap: 40px; 
   justify-content: space-evenly;
 }
 
 .button-left {
   grid-column: 1;
+  margin-left: 20px;
 }
 .button-right {
   grid-column: 2;
+  margin-right: 20px;
   /* justify-self: end; */
 }
 

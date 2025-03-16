@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { APP_INITIALIZER, Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MultipleChoiceComponent } from "../questions/multiple-choice/multiple-choice.component";
 import { Quiz } from '../model/quiz/quiz';
@@ -8,10 +8,25 @@ import { QuestionRepositoryService } from '../service/question-repository.servic
 import { ResultPageComponent } from "../results/result-page/result-page.component";
 import { AppMode } from '../model/app/appmode';
 import { FlowTarget } from '../model/app/flow-targets';
+import { QuizConfiguratorComponent } from '../questions/quiz-configurator/quiz-configurator.component';
+
+export function loadCrucialData() {
+  return function() {
+    return delay(3000);
+  }
+}
+
+export function delay(delay: number) {
+  return function() {
+    return new Promise(function(resolve) {
+      setTimeout(resolve, delay);
+    });
+  }
+}
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MultipleChoiceComponent, ResultPageComponent],
+  imports: [RouterOutlet, MultipleChoiceComponent, ResultPageComponent, QuizConfiguratorComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -30,6 +45,12 @@ export class AppComponent implements OnInit {
 
       //this.addQuestion1(this.quiz);
       //this.addQuestion2(this.quiz);
+  }
+
+  quizConfiguredClicked(quiz: Quiz) {
+    console.log('XXXX');
+    this.quiz = quiz;
+    this.appMode.makeQuizPageVisible();
   }
 
   answersCompletedClicked() {

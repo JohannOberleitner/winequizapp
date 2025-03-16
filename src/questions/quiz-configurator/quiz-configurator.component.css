@@ -1,0 +1,48 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  min-width: 400px;
+  width: 400px;
+  height: 90vh;
+  margin: auto;
+  background-color: black;
+}
+
+div.configurator-panel p {
+  font-size: large;
+  text-align:center;
+  color: white;
+}
+
+#button-panel {
+  min-height: 40px;
+  width: 100%;
+  padding: 0 0px 0 0px;
+  margin-top: auto;
+  margin-bottom: 30px;
+  column-gap: 40px; 
+  justify-content: space-evenly;
+}
+
+.configuration-finished {
+  height: 40px;
+  margin-top: auto;
+  text-align: center;;
+  margin-bottom: 30px;
+}
+
+div.configuration-finished span {
+  height: 100%;
+  word-wrap:normal;
+  text-align: center;
+  display: inline-block;
+
+  align-content: center;
+  background-color: lightgreen;
+  padding: 0px 30px 10px 30px;
+  text-align: justify;
+
+  color: black;
+}

@@ -37,7 +37,10 @@ export class MultipleChoiceComponent implements OnInit, OnChanges {
       console.log('in resetPage');
       this.appMode.removeResetPageFlag();
       this.prepareSelections(this.quiz);
-    }
+    } 
+    //else if (changes['quiz'].) {
+      this.prepareSelections(this.quiz);
+    //}
   }
 
   prepareSelections(quiz: Quiz) {

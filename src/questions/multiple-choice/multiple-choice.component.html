@@ -1,11 +1,12 @@
 @if (appMode.showQuiz) {
 <div class="container">
+  
   <div class="question-text">
     {{question!.text}}
   </div>
 
   <div class="answer-container">
-    @for (answer of selections?.selections; track answer) {
+    @for (answer of quiz.selectionForCurrentQuestion.selections; track answer) {
       <div class="answer" [class.answerselected]="answer.selected"
                           [class.selectedCorrect]="answer.correct"
                           [class.selectedIncorrect]="answer.incorrect"
@@ -14,12 +15,15 @@
       </div>
     }
    </div>
-  <div class="answers-finished" (click)="nextQuestionClicked()">
-    @if (hasFurtherQuestions()) {
-      <span>Nächste Frage</span>
-    } @else {
-      <span>Zur Auswertung</span>
-    }
+   <div class="bottom-panel">
+    <div class="question-number"><span> {{ quiz.currentQuestion.index }} / {{ quiz.numberOfQuestions }}</span></div>
+    <div class="answers-finished" (click)="nextQuestionClicked()">
+      @if (hasFurtherQuestions()) {
+        <span>Nächste Frage</span>
+      } @else {
+        <span>Zur Auswertung</span>
+      }
   </div>
+</div>
 </div>
 }

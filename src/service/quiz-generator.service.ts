@@ -18,15 +18,20 @@ export class QuizGeneratorService {
 
   public createCountryQuiz(): Quiz {
     let quiz = new Quiz();
+    let index=1;
     for (let country of this.countryData) {
-      this.add(quiz, this._countryWineAreaQuestionGenerator.makeQuestion(country));
-      this.add(quiz, this._countryProductionAmountQuestionGenerator.makeQuestion(country));
+      
+      index += this.add(quiz, this._countryWineAreaQuestionGenerator.makeQuestion(index, country));
+      index += this.add(quiz, this._countryProductionAmountQuestionGenerator.makeQuestion(index, country));
     }
     return quiz;
   }
-  private add(quiz: Quiz, question: IQuestion | undefined) {
-    if (question != undefined)
+  private add(quiz: Quiz, question: IQuestion | undefined): number {
+    if (question != undefined) {
       quiz.add(new Question(question));
+      return 1;
+    }
+    return 0;
   }
 
   public createGrapeVarietyQuiz() {
@@ -43,7 +48,8 @@ export class QuizGeneratorService {
 
   countryData: ICountryData[] = [
     {
-      name: 'Frankreich', wineArea: 790000
+      name: 'Frankreich', wineArea: 790000, proCapitaConsumption: 42,
+      productionAmount: 44
     },
     {
       name: 'Deutschland', wineArea: 103000, proCapitaConsumption: 20,
@@ -75,6 +81,11 @@ export class QuizGeneratorService {
       exportAndCnsumption: { consumer: 90 }
     },
     { name:'Kroatien', wineArea: 21000, productionAmount: 1
+    },
+    {
+      name:'Slowenien', wineArea: 21200, productionAmount: 0.8,
+      proCapitaConsumption: 40,
+      grapeColorDistriubtion: { white: 70, red: 30 } 
     }
   ];
 }
@@ -124,14 +135,14 @@ abstract class BaseQuestionGenerator {
   protected resort(answers: IAnswer[]): IAnswer[] {
     return shuffleArray<IAnswer>(answers);
   }
-  public makeQuestion(country: ICountryData): IQuestion | undefined {
+  public makeQuestion(index: number, country: ICountryData): IQuestion | undefined {
     if (! this.checkQuestionPossible(country))
       return undefined;
 
     let answers: IAnswer[] = this.makeAnswers(country);
     let article = country.article ? country.article : '';
     let text = this.makeQuestionText(country); // `Wie groß ist die Rebfläche von ${article}${country.name}? `;
-    return { text: text, answers: this.resort(answers) };;
+    return { index: index, text: text, answers: this.resort(answers) };;
   }
   protected makeAnswers(country: ICountryData): IAnswer[] {
     let answers: IAnswer[] = [];
@@ -227,6 +238,7 @@ class CountryWineAreaQuestionGenerator extends BaseQuestionGenerator {
     return Math.round(fictiveWineArea / this.roundingSize)*this.roundingSize;
   }
 
+  /*
   makeProducitonAmountQuestion(country: ICountryData): IQuestion {
     
     let answers: IAnswer[] = this.makeAnswers(country);
@@ -235,6 +247,7 @@ class CountryWineAreaQuestionGenerator extends BaseQuestionGenerator {
     return { text: text, answers: this.resort(answers) };;
 
   }
+    */
 }
 
 class CountryProductionAmountQuestionGenerator extends NumericQuestionGenerator {
@@ -245,7 +258,7 @@ class CountryProductionAmountQuestionGenerator extends NumericQuestionGenerator 
 
   protected override makeQuestionText(country: ICountryData): string {
     let article = country.article ? country.article : '';
-    return `Wieviel Wein wird in ${article}${country.name}? im Jahr produziert?`;
+    return `Wieviel Wein wird in ${article}${country.name} im Jahr produziert?`;
   }
 
   protected override checkQuestionPossible(country: ICountryData): boolean {

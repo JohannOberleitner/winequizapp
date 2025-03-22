@@ -16,10 +16,11 @@ div.results-panel {
     /*padding: 20px 0px 0px 0px;*/
   padding: 0px;
   align-items: stretch;
+  font-size: x-large;
 }
 
 div.results-panel p {
-  font-size: large;
+  font-size: x-large;
   text-align:center;
 }
 
@@ -58,8 +59,9 @@ table#results {
   margin-bottom: 30px;
   display: grid;
   grid-template-columns: repeat(2, 40%);
-  column-gap: 40px; 
+  column-gap: 10px; 
   justify-content: space-evenly;
+  font-size: large;
 }
 
 .button-left {

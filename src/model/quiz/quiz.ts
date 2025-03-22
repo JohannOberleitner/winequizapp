@@ -8,6 +8,7 @@ export class Quiz {
   _questions: Question[];
   _selectionForQuestions: SelectionCollection[];
   _quizMode: QuizMode;
+  _shadowQuizWithWrongAnswers?: Quiz;
 
   constructor() {
     this._currentQuestionIndex = 0;
@@ -22,17 +23,21 @@ export class Quiz {
   }
 
   get questions(): Question[] {
-    return this._questions;
+    return this.getQuiz()._questions;
   }
 
+    
   get currentQuestion(): Question {
-    return this._questions[this._currentQuestionIndex];
+    //this._currentQuestionIndex;
+
+    return this.getQuiz()._questions![this._currentQuestionIndex];
   }
   get currentQuestionIndex(): number {
     return this._currentQuestionIndex + 1;
   }
   get selectionForCurrentQuestion(): SelectionCollection {
-    return this._selectionForQuestions[this._currentQuestionIndex];
+    
+    return this._selectionForQuestions[this.currentQuestion.index - 1];
   }
 
   get quizMode(): QuizMode {
@@ -51,7 +56,7 @@ export class Quiz {
   }
 
   hasFurtherQuestions(): boolean {
-    return this._currentQuestionIndex < this._questions.length - 1;
+    return this._currentQuestionIndex < this.getQuiz()._questions.length - 1;
   }
 
   switchQuizMode(targetMode: QuizMode) {
@@ -86,6 +91,34 @@ export class Quiz {
     }
     return count;
   }
+
+  private _showOnlyWrongQuestions: boolean = false;
+
+  setShowOnlyWrongQuestions(onlyWrongQuestions: boolean) {
+    if (onlyWrongQuestions) {
+      this.makeQuizWithOnlyWrongAnsers();
+    }
+    this._showOnlyWrongQuestions = onlyWrongQuestions;
+  }
+
+  getQuiz(): Quiz {
+    if (this._showOnlyWrongQuestions) {
+      return this._shadowQuizWithWrongAnswers!;
+    }
+    return this;
+  }
+
+  private makeQuizWithOnlyWrongAnsers() {
+    let quiz = new Quiz();
+    for(let i=0; i<this._questions.length; ++i) {
+      let question = this._questions[i];
+      if (!this._selectionForQuestions[i].isCompletelyCorrect) {
+        quiz.add(question);
+      }
+    }
+    this._shadowQuizWithWrongAnswers = quiz;
+  }
+
 
 
 }

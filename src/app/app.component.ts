@@ -58,8 +58,9 @@ export class AppComponent implements OnInit {
   }
 
   resultsPageLeft(target: FlowTarget) {
-    if (target == FlowTarget.DetailedResults) {
-      this.appMode.makeQuizPageVisible();
+    if (target == FlowTarget.DetailedResults || target == FlowTarget.DetailedResultsForErrors) {
+      this.quiz.setShowOnlyWrongQuestions(target == FlowTarget.DetailedResultsForErrors);
+      this.appMode.makeQuizPageVisible(target == FlowTarget.DetailedResults);
     } else {
       console.log('New Quiz');
       this.quiz = this.questionRepositoryService.createQuiz();

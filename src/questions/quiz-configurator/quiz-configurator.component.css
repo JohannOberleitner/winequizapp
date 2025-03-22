@@ -11,7 +11,7 @@
 }
 
 div.configurator-panel p {
-  font-size: large;
+  font-size:x-large;
   text-align:center;
   color: white;
 }
@@ -29,7 +29,8 @@ div.configurator-panel p {
 .configuration-finished {
   height: 40px;
   margin-top: auto;
-  text-align: center;;
+  text-align: center;
+  font-size: x-large;
   margin-bottom: 30px;
 }
 
@@ -38,7 +39,7 @@ div.configuration-finished span {
   word-wrap:normal;
   text-align: center;
   display: inline-block;
-
+ 
   align-content: center;
   background-color: lightgreen;
   padding: 0px 30px 10px 30px;

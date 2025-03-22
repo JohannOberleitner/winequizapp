@@ -28,7 +28,7 @@ export class QuestionRepositoryService {
     quiz.add(this.makeQuestion1());
   }
   private makeQuestion1(): Question {
-    let s = '{ "text": "Wo wird Furmint angebaut", "answers": '+
+    let s = '{ "index":1, "text": "Wo wird Furmint angebaut", "answers": '+
             '[ { "name": "Tokaj", "isCorrect": true },' +
               '{ "name": "Somlö", "isCorrect": true },' +
               '{ "name": "Villanyi", "isCorrect": false },' +
@@ -45,6 +45,6 @@ export class QuestionRepositoryService {
     answers.push(Answer.create("Glimmerschiefer"));
     answers.push(Answer.create("Tuff", true));
     answers.push(Answer.create("Löss"));
-    return Question.create('Welche Böden sind in Eger DHC vorherrschend', answers);
+    return Question.create(2, 'Welche Böden sind in Eger DHC vorherrschend', answers);
   }
 }

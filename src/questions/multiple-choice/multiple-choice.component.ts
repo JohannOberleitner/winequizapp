@@ -22,7 +22,7 @@ export class MultipleChoiceComponent implements OnInit, OnChanges {
 
   @Output() doneEvent = new EventEmitter<void>();
 
-  selections: SelectionCollection | undefined;
+  _selections: SelectionCollection | undefined;
   question: Question | undefined;
 
   constructor() {
@@ -46,18 +46,19 @@ export class MultipleChoiceComponent implements OnInit, OnChanges {
   prepareSelections(quiz: Quiz) {
     this.question = quiz.currentQuestion;
 
-    this.selections = quiz.selectionForCurrentQuestion;
+    this._selections = quiz.selectionForCurrentQuestion;
     this.addAnswersToSelections(quiz);
   }
 
   addAnswersToSelections(quiz: Quiz) {
     let answers = this.question!.answers;
-    this.selections = quiz.selectionForCurrentQuestion;
+    this._selections = quiz.selectionForCurrentQuestion;
 
     if (quiz.userCanAnswerQuestions) {
       for(let answer of answers) {
-        this.selections.add(new Selection(answer));
-     }
+        this._selections.add(new Selection(answer));
+        console.log(answer.name);
+      }
     }
   }
 
@@ -99,6 +100,9 @@ export class MultipleChoiceComponent implements OnInit, OnChanges {
     return this.quiz.hasFurtherQuestions();
   }
 
+  public get selections(): SelectionCollection|undefined {
+    return this._selections;
+  }
   /*public static checkResults(selections: SelectionCollection): ResultCollection {
     let result = new ResultCollection(selections);
     return result;

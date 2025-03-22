@@ -12,8 +12,11 @@
     </table>
   </div>
 
+  <div id="button-panel-settings">
+    <input type="checkbox" [(ngModel)]="checkedWrongResultsOnly" >Nur falsche Antworten
+  </div>
   <div id="button-panel">
-    <div (click)="detailedResults_clicked()" class="clickable-panel button-left"><span>Detailed Results</span></div>
+    <div (click)="detailedResults_clicked()"  class="clickable-panel button-left"><span>Ergebnisse</span></div>
     <div (click)="newQuiz_clicked()" class="clickable-panel button-right"><span>Neues Quiz</span></div>
   </div>
 </div>

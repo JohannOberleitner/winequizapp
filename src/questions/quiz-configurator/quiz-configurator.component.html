@@ -2,10 +2,19 @@
   <div class="container">
     <div class="configurator-panel">
       <p>Quiz Configurator</p>
+      <div class="selection-panel">
+        <input type="checkbox" id="cb-country-statistics-id" [(ngModel)]="includeQuestionsForCountryData"><label for="cb-country-statistics-id">Länderdaten</label>
+      </div>
+      <div class="selection-panel">
+        <input type="checkbox" id="cb-grapevarieites-id" [(ngModel)]="includeQuestionsForGrapeVarieties"><label for="cb-grapevarieites-id">Rebsorten</label>
+      </div>
+      <div class="selection-panel">
+        <input type="checkbox" id="cb-wineregions-id" [(ngModel)]="includeQuestionsForWineRegions"><label for="cb-wineregions-id">Weinregionen</label>
+      </div>
     </div>
 
     <div id="button-panel">
-      <div (click)="startQuiz_clicked()" class="configuration-finished"><span>Quiz starten</span></div>
+      <div (click)="filterQuestions_clicked()" class="configuration-finished"><span>Fragen einschränken</span></div>
     </div>
   </div>
 }

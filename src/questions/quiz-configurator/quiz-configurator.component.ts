@@ -1,30 +1,35 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AppMode } from '../../model/app/appmode';
-import { Quiz } from '../../model/quiz/quiz';
-import { QuestionRepositoryService } from '../../service/question-repository.service';
-import { QuizGeneratorService } from '../../service/quiz-generator.service';
+import { QuizConfiguration } from '../../model/quiz/quiz-configuration';
 
 @Component({
   selector: 'app-quiz-configurator',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './quiz-configurator.component.html',
   styleUrl: './quiz-configurator.component.css'
 })
 export class QuizConfiguratorComponent {
 
-  @Input({required:true}) quiz!: Quiz;
-
   @Input({required:true}) appMode!: AppMode;
+  @Input({required:true}) quizConfiguration!: QuizConfiguration;
 
-  @Output() quizConfiguredEvent = new EventEmitter<Quiz>();
+  public includeQuestionsForCountryData: boolean = false;
+  public includeQuestionsForGrapeVarieties: boolean = false;
+  public includeQuestionsForWineRegions: boolean = false;
 
-  constructor(private quizGeneratorServie: QuizGeneratorService, private questionRepositoryService: QuestionRepositoryService) {
+  @Output() questionFilterEvent = new EventEmitter<void>();
 
+  constructor() {
   }
 
-  startQuiz_clicked() {
-    console.log('YYY');
-    let quiz = this.quizGeneratorServie.createCountryQuiz();
-    this.quizConfiguredEvent.emit(quiz);
-  }
+  
+  filterQuestions_clicked() {
+    this.quizConfiguration.includeQuestionsForCountryData = this.includeQuestionsForCountryData;
+    this.quizConfiguration.includeQuestionsForGrapeVarienties = this.includeQuestionsForGrapeVarieties;
+    this.quizConfiguration.includeQuestionsForWineRegions = this.includeQuestionsForWineRegions;
+
+    this.quizConfiguration.clearCache();
+    this.questionFilterEvent.emit();
+  }  
 }

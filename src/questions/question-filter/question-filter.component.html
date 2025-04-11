@@ -1,0 +1,15 @@
+@if (appMode.showFilter) {
+  <div class="container">
+    <div class="configurator-panel">
+      <p>Fragen-Auswahl</p>
+      <div class="selection-panel">
+        <input type="range" id="cb-selected-questions-id" min="0" max="100" [(ngModel)]="selectedQuestionFraction"><label for="cb-selected-questions-id">Anzahl Fragen {{selectedQuestionCount}}/{{totalQuestionCount }}</label>
+      </div>
+    </div>
+
+
+    <div id="button-panel">
+      <div (click)="startQuiz_clicked()" class="configuration-finished"><span>Quiz starten</span></div>
+    </div>
+  </div>
+}

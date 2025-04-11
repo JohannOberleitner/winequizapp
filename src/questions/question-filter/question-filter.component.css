@@ -25,27 +25,11 @@ div.selection-panel {
   margin-bottom: 2%;
 }
 
-div.selection-panel input {
-  scale: 1.8;
-  translate: 0 -2px; /* the -2px is just working on my machine */
-  margin-right: 20px;
-}
-
 div.selection-panel input + label {
   font-size: large;
   color: white;
 }
-div.selection-panel input:disabled + label {
-  color: darkgray;
-}
 
-
-/*
-div.selection-panel input + label {
-  width: 100%;
-  color: white;
-  background-color: green;
-}*/
 
 #button-panel {
   min-height: 40px;

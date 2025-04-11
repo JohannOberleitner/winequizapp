@@ -1,5 +1,5 @@
-<app-quiz-configurator [quiz]="quiz" [appMode]="appMode" (quizConfiguredEvent)="quizConfiguredClicked($event)"></app-quiz-configurator>
-
+<app-quiz-configurator [appMode]="appMode" [quizConfiguration]="quizConfiguration" (questionFilterEvent)="questionFilterClicked()"></app-quiz-configurator>
+<app-question-filter [appMode]="appMode" [quiz]="quiz" [quizConfiguration]="quizConfiguration" (quizConfiguredEvent)="quizConfiguredClicked($event)">  </app-question-filter>
 <app-multiple-choice [quiz]="quiz" [appMode]="appMode" (doneEvent)="answersCompletedClicked()"></app-multiple-choice>
 <app-result-page [quiz]="quiz" [appMode]="appMode" (pageLeftEvent)="resultsPageLeft($event)"></app-result-page>
 <router-outlet />

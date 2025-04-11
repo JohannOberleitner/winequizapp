@@ -15,7 +15,7 @@
   padding-top: 12px;
   color: white;
   text-align: center;
-  font-size:x-large;
+  font-size:large;
 }
 
 
@@ -79,7 +79,7 @@ div.answers-finished span {
   background-color: dodgerblue;
   color: black;
   text-align: center;
-  font-size: xx-large;
+  font-size: x-large;
   max-width: 80%;
   height: 16% ;
 }

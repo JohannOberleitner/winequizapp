@@ -9,6 +9,8 @@ import { ResultPageComponent } from "../results/result-page/result-page.componen
 import { AppMode } from '../model/app/appmode';
 import { FlowTarget } from '../model/app/flow-targets';
 import { QuizConfiguratorComponent } from '../questions/quiz-configurator/quiz-configurator.component';
+import { QuizConfiguration } from '../model/quiz/quiz-configuration';
+import { QuestionFilterComponent } from "../questions/question-filter/question-filter.component";
 
 export function loadCrucialData() {
   return function() {
@@ -26,14 +28,16 @@ export function delay(delay: number) {
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MultipleChoiceComponent, ResultPageComponent, QuizConfiguratorComponent],
+  imports: [RouterOutlet, MultipleChoiceComponent, ResultPageComponent, QuizConfiguratorComponent, QuestionFilterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
   title = 'winequizapp';
 
+  quizConfiguration: QuizConfiguration = new QuizConfiguration(); 
   quiz: Quiz = new Quiz;
+
   //showResultPage: boolean = false;
   appMode: AppMode = new AppMode();
 
@@ -42,13 +46,13 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
       this.quiz = this.questionRepositoryService.createQuiz();
+  }
 
-      //this.addQuestion1(this.quiz);
-      //this.addQuestion2(this.quiz);
+  questionFilterClicked() {
+    this.appMode.makeFilterPageVisible();
   }
 
   quizConfiguredClicked(quiz: Quiz) {
-    console.log('XXXX');
     this.quiz = quiz;
     this.appMode.makeQuizPageVisible();
   }

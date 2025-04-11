@@ -28,7 +28,9 @@ export class ResultPageComponent {
 
   detailedResults_clicked() {
     if (this.checkedWrongResultsOnly) {
-      this.pageLeftEvent.emit(FlowTarget.DetailedResultsForErrors);
+      if (this.quiz.numberOfCompletelyCorrectQuestions < this.quiz.numberOfQuestions) {
+        this.pageLeftEvent.emit(FlowTarget.DetailedResultsForErrors);
+      }
     } else {
       this.pageLeftEvent.emit(FlowTarget.DetailedResults);
     }

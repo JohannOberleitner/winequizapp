@@ -1,5 +1,5 @@
 import { IProductionWineDistribution, IProductionWineDistributionStatement } from "../countryData/entities"
-import { IGrapeVarietyData } from "../grapevarieties/entities"
+import { GrapeColor, IGrapeVarietyData } from "../grapevarieties/entities"
 
 
 
@@ -14,7 +14,8 @@ export interface IWineRegionData {
   importantGrapes?: IGrapeVarietyData[],
   geography?: IGeographyData
   terroir?: ITerroirData,
-  specials?: ISpecialQuestion[]
+  specials?: ISpecialQuestion[],
+  appellations?: IAppellationData[]
 }
 
 export interface IHarvestTime {
@@ -77,3 +78,43 @@ export interface INumberRange {
   highest: number
 }
 
+export interface IAppellationData {
+  name: string,
+  category?: string,
+  area?: number,
+  terroir?: ITerroirData,
+  grapeVarieties?: string[],
+  legal?: IAppellationLaws
+  suggarWine?: ISuggarWineData,
+  comments?: string[]
+}
+
+export enum WineColor {
+  White,
+  LieblichWhite,
+  SweetWhite,
+  Red,
+  Rose
+}
+
+export interface IAppellationLaws {
+  allowedColors?: WineColor[],
+  specialRule?: string[],
+  grapeVarities?: string[],
+  specials?: ISpecialQuestion[],
+  minimumAlcohol_white?: number,
+  minimumAlcohol_red?: number,
+  maximumVield?: number,
+  maximumVield_white?: number,
+  maximumVield_red?: number,
+  manualHarvest?: boolean
+}
+
+export interface ISuggarWineData {
+  botrytisOnly?: boolean,
+  botrytisInfluencedBy?: string,
+  remainingSuggar?: number,
+  maxRemainingSuggar?: number,
+  alcohol?: number,
+  maxAlcohol?: number
+}

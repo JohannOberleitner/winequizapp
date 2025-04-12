@@ -1,7 +1,7 @@
 import { IQuestion, Question } from "../../model/quiz/question";
 import { Quiz } from "../../model/quiz/quiz";
 import { QuizConfiguration } from "../../model/quiz/quiz-configuration";
-import { BaseQuestionGenerator } from "./base-generators";
+import { AbstractBaseQuestionGenerator, BaseQuestionGenerator } from "./base-generators";
 
 export interface IBaseQuestionGeneratorService {
   supports(quizConfiguration: QuizConfiguration): boolean;
@@ -12,7 +12,7 @@ export interface IBaseQuestionGeneratorService {
 export abstract class BaseQuestionGeneratorService<T> implements IBaseQuestionGeneratorService {
 
   public abstract supports(quizConfiguration: QuizConfiguration): boolean;
-  public abstract get generators(): BaseQuestionGenerator<T>[]; 
+  public abstract get generators(): AbstractBaseQuestionGenerator<T>[]; 
   public abstract get data(): T[];
 
   protected add(quiz: Quiz, question: IQuestion | undefined): number {

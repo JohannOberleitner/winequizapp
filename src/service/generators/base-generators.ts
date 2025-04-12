@@ -3,21 +3,32 @@ import { IQuestion } from "../../model/quiz/question";
 import { ISpellEnrichmentService } from "../spell-enrichment.service";
 import { shuffleArray } from "../utilities";
 
-export abstract class BaseQuestionGenerator<T> {
 
-  constructor(protected count: number, protected spellenrichmentService: ISpellEnrichmentService) {
-  }
+export abstract class AbstractBaseQuestionGenerator<T> {
 
   protected resort(answers: IAnswer[]): IAnswer[] {
     return shuffleArray<IAnswer>(answers);
   }
-  public countQuestion(data: T): number {
+
+  protected abstract checkQuestionsPossible(data: T): boolean;
+  public abstract countQuestion(data: T): number;
+  public abstract makeQuestion(startIndex: number, data: T): IQuestion[] | undefined;
+}
+
+export abstract class BaseQuestionGenerator<T> extends AbstractBaseQuestionGenerator<T> {
+
+  constructor(protected count: number, protected spellenrichmentService: ISpellEnrichmentService) {
+    super();
+  }
+
+  
+  public override countQuestion(data: T): number {
     if (! this.checkQuestionsPossible(data))
       return 0;
     return 1;
   }
 
-  public makeQuestion(startIndex: number, data: T): IQuestion[] | undefined {
+  public override makeQuestion(startIndex: number, data: T): IQuestion[] | undefined {
     if (! this.checkQuestionsPossible(data))
       return undefined;
 
@@ -41,7 +52,6 @@ export abstract class BaseQuestionGenerator<T> {
     return answers;
   }
 
-  protected abstract checkQuestionsPossible(data: T): boolean;
   protected abstract makeQuestionText(relativeIndex: number, data: T): string;
 
   protected abstract makeCorrectAnswers(relativeIndex: number, data: T): IAnswer[];
